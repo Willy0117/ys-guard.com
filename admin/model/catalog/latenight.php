@@ -1,7 +1,9 @@
 <?php
 class ModelCatalogLatenight extends Model {
 	public function addLatenight($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "latenight SET timeindex = '" . $this->db->escape($data['timeindex']) . "', price = '" . $data['price'] . "', invoice = '" . $data['invoice'] . "', tax_id = '" . (int)$data['tax_id']. "', date_modified = NOW(), date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "latenight SET timeindex = '" . $this->db->escape($data['timeindex']) . "', price = '" . $data['price'] . "', invoice = '" . $data['invoice'] 
+        . "', tax_id = '" . (int)$data['tax_id']. "', date_from = '" . $data['date_from'] . "', date_to = '" . $data['date_to']
+        . "', date_modified = NOW(), date_added = NOW()");
 
 		$id = $this->db->getLastId(); 
 			
@@ -9,7 +11,9 @@ class ModelCatalogLatenight extends Model {
 	}
 	
 	public function editLatenight($id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "latenight SET timeindex = '" . $this->db->escape($data['timeindex']) . "', price = '" . $data['price'] . "', invoice = '" . $data['invoice'] . "', tax_id = '" . (int)$data['tax_id'] . "', date_modified = NOW() WHERE id = '" . (int)$id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "latenight SET timeindex = '" . $this->db->escape($data['timeindex']) . "', price = '" . $data['price'] . "', invoice = '" . $data['invoice'] 
+        . "', tax_id = '" . (int)$data['tax_id'] . "', date_from = '" . $data['date_from'] . "', date_to = '" . $data['date_to']  
+        . "', date_modified = NOW() WHERE id = '" . (int)$id . "'");
 		
 		$this->cache->delete('latenight');
 	}
@@ -72,8 +76,13 @@ class ModelCatalogLatenight extends Model {
 		return $query->row['total'];
 	}
 	
-	public function getLatenightByPrice($minute) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "latenight WHERE timeindex = '" . (int)$minute . "'");
+	public function getLatenightByPrice($minute,$travel) {
+		$sql = "SELECT DISTINCT * FROM " . DB_PREFIX . "latenight WHERE timeindex = '" . (int)$minute . "'";
+        if (isset($travel) && $travel !== null) {
+			$sql .= " AND CAST('" . $travel . "' AS DATE) BETWEEN date_from AND date_to ";
+		}
+        
+        $query = $this->db->query($sql);
 		
 		return $query->row;		
 		

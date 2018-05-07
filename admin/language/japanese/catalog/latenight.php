@@ -14,13 +14,16 @@ $_['column_price']	     = '提供価格';
 $_['column_invoice']	 = '仕切価格';
 $_['column_action']      = 'Action';
 $_['column_tax']      = '税';
-
+$_['column_date_from']            = '開始日';
+$_['column_date_to']              = '終了日';
 
 // Entry
 $_['entry_timeindex']   = '時間:';
 $_['entry_price']   = '提供価格:';
 $_['entry_invoice']	= '仕切価格:';
 $_['entry_tax']		= '税:';
+$_['entry_date_from']             = '開始日';
+$_['entry_date_to']               = '終了日';
 
 // Error
 $_['error_permission']  = '警告:あなたにこれらを変更する権限がありません!';

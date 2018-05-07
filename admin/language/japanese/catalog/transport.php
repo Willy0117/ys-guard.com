@@ -15,14 +15,18 @@ $_['column_invoice']         = '仕切価格';
 $_['column_sort_order']	     = '並び順';
 $_['column_action']          = 'Action';
 $_['column_status']          = 'ステータス';
+$_['column_date_from']            = '開始日';
+$_['column_date_to']              = '終了日';
 
 
 // Entry
-$_['entry_distance']             = '運行距離:';
+$_['entry_distance']         = '運行距離:';
 $_['entry_status']           = 'ステータス:';
 $_['entry_sort_order']		 = '表示順:';
 $_['entry_price']			 = '提供価格:';
 $_['entry_invoice']			 = '仕切価格:';
+$_['entry_date_from']             = '開始日';
+$_['entry_date_to']               = '終了日';
 
 // Help
 $_['help_bottom']            = 'Display in the bottom footer.';

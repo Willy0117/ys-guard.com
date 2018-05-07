@@ -566,7 +566,7 @@ $(document).ready(function () {
           return;
         }
         var id = data[0]['id'];
-        var seturl = 'index.php?route=catalog/latenight/getLateNightPrice&token=' + getURLVar('token') + '&minute=' + time;
+        var seturl = 'index.php?route=catalog/latenight/getLateNightPrice&token=' + getURLVar('token') + '&minute=' + time + '&travel=' + travel;
         $.ajax({
           url: seturl,
           type: "POST",
@@ -733,10 +733,10 @@ $( 'select[name="purpose"]' ).change( function() {
       $('.model').eq(0).val(data['model']);
       $('.name').eq(0).val(data['name']);
       $('.tax_id').eq(0).val(data['tax_id']);
-
+      var travel = $( 'input[name="travel"]' ).val();  // 日にちの取得
       var data = $('.mileage').eq(5).val();
       if ( data > 0 ) {
-        var seturl = 'index.php?route=catalog/transport/getPrice&token=' + getURLVar('token') + '&distance=' + data;
+        var seturl = 'index.php?route=catalog/transport/getPrice&token=' + getURLVar('token') + '&distance=' + data + '&travel=' + travel;
         $.ajax({
           url: seturl,
           type: "POST",

@@ -53,7 +53,7 @@
                   <select name="tax_id" id="input-tax" class="form-control">
                     <?php if ($taxes) { ?>
                       <?php foreach($taxes as $result) { ?>
-                          <?php if ($result['id'] == $sect) { ?>
+                          <?php if ($result['id'] == $tax_id) { ?>
                             <option value="<?php echo $result['id'];?>" selected="selected"><?php echo $result['title'];?></option>
                           <?php } else { ?>
                             <option value="<?php echo $result['id'];?>"><?php echo $result['title'];?></option>
@@ -63,9 +63,37 @@
                   </select>
                 </div>
               </div>
+            
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-date_from"><?php echo $entry_date_from; ?></label>
+                <div class="col-sm-10">
+                    <div class="flatpickr input-group date" data-wrap="true" data-clickOpens="false">
+                        <input type="text" name="date_from" value="<?php echo $date_from; ?>" placeholder="<?php echo $entry_date_from; ?>" id="input-date_from" class="form-control" data-format="YYYY-MM-DD"  data-altinput=true data-input />
+                        <a class="input-group-addon" data-toggle><i class='fa fa-calendar'></i></a>    
+
+                    </div>
+                </div>    
+              </div>
+            
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-date_to"><?php echo $entry_date_to; ?></label>
+                <div class="col-sm-10">
+                    <div class="flatpickr input-group date" data-wrap="true" data-clickOpens="false">
+                        <input type="text" name="date_to" value="<?php echo $date_to; ?>" placeholder="<?php echo $entry_date_to; ?>" id="input-date_to" class="form-control" data-format="YYYY-MM-DD"  data-altinput=true data-input />
+                        <a class="input-group-addon" data-toggle><i class='fa fa-calendar'></i></a>        
+                    </div>
+                </div>
+              </div>
+            
           </div>
         </form>
       </div>
     </div>
   </div>
+<script>
+  flatpickr('.flatpickr', {
+    locale: 'ja',
+    allowInput: true,
+});
+</script>
 <?php echo $footer; ?>

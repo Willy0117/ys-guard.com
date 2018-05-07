@@ -176,8 +176,10 @@ class ControllerCatalogTransport extends Controller {
 				'distance'         => $result['distance'],
 				'price'            => $result['price'],
 				'invoice'          => $result['invoice'],
-				'status'			=> ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'edit'            => $this->url->link('catalog/transport/edit', 'token=' . $this->session->data['token'] . '&id=' . $result['id'] . $url, 'SSL')
+				'date_from'             => $result['date_from'],
+				'date_to'               => $result['date_to'],
+				'status'		   => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'edit'             => $this->url->link('catalog/transport/edit', 'token=' . $this->session->data['token'] . '&id=' . $result['id'] . $url, 'SSL')
 			);
 		}
 
@@ -192,6 +194,8 @@ class ControllerCatalogTransport extends Controller {
 		$data['column_invoice'] = $this->language->get('column_invoice');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_date_from'] = $this->language->get('column_date_from');
+		$data['column_date_to'] = $this->language->get('column_date_to');
 
 		$data['button_insert'] = $this->language->get('button_insert');
 		$data['button_edit'] = $this->language->get('button_edit');
@@ -275,6 +279,8 @@ class ControllerCatalogTransport extends Controller {
 		$data['entry_invoice'] = $this->language->get('entry_invoice');
 		$data['entry_sort_price'] = $this->language->get('entry_sort_price');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_date_from'] = $this->language->get('entry_date_from');
+		$data['entry_date_to'] = $this->language->get('entry_date_to');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -348,6 +354,22 @@ class ControllerCatalogTransport extends Controller {
 			$data['status'] = '';
 		}
 
+        if (isset($this->request->post['date_from'])) {
+			$data['date_from'] = $this->request->post['date_from'];
+		} elseif (!empty($transport_info)) {
+			$data['date_from'] = $transport_info['date_from'];
+		} else {
+			$data['date_from'] = '0000-01-01';
+		}
+
+        if (isset($this->request->post['date_to'])) {
+			$data['date_to'] = $this->request->post['date_to'];
+		} elseif (!empty($transport_info)) {
+			$data['date_to'] = $transport_info['date_to'];
+		} else {
+			$data['date_to'] = '9999-12-31';
+		}
+        
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -400,9 +422,10 @@ class ControllerCatalogTransport extends Controller {
 
 		$this->load->model('catalog/transport');
 
-		if (isset($this->request->get['distance'])) {
+		if (isset($this->request->get['distance']) && isset($this->request->get['travel']) ) {
 			$distance = $this->request->get['distance'];
-			$json = $this->model_catalog_transport->getMileage($distance);
+			$travel = $this->request->get['travel'];
+			$json = $this->model_catalog_transport->getMileage($distance,$travel);
 		} 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
