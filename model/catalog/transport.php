@@ -4,6 +4,8 @@ class ModelCatalogTransport extends Model {
 
 		$this->db->query("INSERT INTO " . DB_PREFIX . "transport SET distance = '" . (int)$data['distance']  
 		. "', price = '" . $data['price'] . "', invoice = '" . $data['invoice']
+		. "', tax_id = '" . (int)$data['tax_id'] 
+        . "', date_from = '" . $data['date_from'] . "', date_to = '" . $data['date_to']                     
 		. "', date_modified = NOW(), date_added = NOW()");
 
 	}
@@ -11,6 +13,8 @@ class ModelCatalogTransport extends Model {
 	public function editTransport($id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "transport SET distance = '" . (int)$data['distance'] 
 		. "', price = '" . (int)$data['price'] . "', invoice = '" . $data['invoice'] 
+		. "', tax_id = '" . (int)$data['tax_id'] 
+        . "', date_from = '" . $data['date_from'] . "', date_to = '" . $data['date_to']                 
 		. "', date_modified = NOW() WHERE id = '" . (int)$id . "'");
 	}
 
@@ -43,6 +47,9 @@ class ModelCatalogTransport extends Model {
 			'distance',
 			'price',
 			'invoice',
+            'tax_id',
+            'date_from',
+            'date_to',
 			'status'
 		);
 
@@ -81,11 +88,15 @@ class ModelCatalogTransport extends Model {
 		return $query->row['total'];
 	}
 
-	public function getMileage($distance) {
+	public function getMileage($distance,$travel) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "transport WHERE distance >= '". $distance . "'";
+
+        if (isset($travel) && $travel !== null) {
+			$sql .= " AND CAST('" . $travel . "' AS DATE) BETWEEN date_from AND date_to ";
+		}
+        
 		$sql .= " ORDER BY distance";
 		$query = $this->db->query($sql);
 		return $query->rows;
 	}
-
 }

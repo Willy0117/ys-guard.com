@@ -52,7 +52,7 @@ class ControllerCatalogLatenight extends Controller {
 		$this->load->model('catalog/latenight');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_latenight->editLatenight($this->request->get['latenight_id'], $this->request->post);
+			$this->model_catalog_latenight->editLatenight($this->request->get['id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -174,6 +174,8 @@ class ControllerCatalogLatenight extends Controller {
 				'price'      => $result['price'],
 				'invoice'	=> $result['invoice'],
 				'tax' => $tax,
+				'date_from'	=> $result['date_from'],
+				'date_to'	=> $result['date_to'],
 				'edit'            => $this->url->link('catalog/latenight/edit', 'token=' . $this->session->data['token'] . '&id=' . $result['id'] . $url, 'SSL')
 			);
 		}
@@ -189,6 +191,8 @@ class ControllerCatalogLatenight extends Controller {
 		$data['column_invoice'] = $this->language->get('column_invoice');
 		$data['column_tax'] = $this->language->get('column_tax');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_date_from'] = $this->language->get('column_date_from');
+		$data['column_date_to'] = $this->language->get('column_date_to');
 
 		$data['button_insert'] = $this->language->get('button_insert');
 		$data['button_edit'] = $this->language->get('button_edit');
@@ -230,6 +234,8 @@ class ControllerCatalogLatenight extends Controller {
 		$data['sort_price'] = $this->url->link('catalog/latenight', 'token=' . $this->session->data['token'] . '&sort=price' . $url, 'SSL');
 		$data['sort_invoice'] = $this->url->link('catalog/latenight', 'token=' . $this->session->data['token'] . '&sort=invoice' . $url, 'SSL');
 		$data['sort_tax'] = $this->url->link('catalog/latenight', 'token=' . $this->session->data['token'] . '&sort=tax' . $url, 'SSL');
+		$data['sort_date_from'] = $this->url->link('catalog/latenight', 'token=' . $this->session->data['token'] . '&sort=date_from' . $url, 'SSL');
+		$data['sort_date_to'] = $this->url->link('catalog/latenight', 'token=' . $this->session->data['token'] . '&sort=date_to' . $url, 'SSL');
 
 		$url = '';
 
@@ -272,6 +278,8 @@ class ControllerCatalogLatenight extends Controller {
 		$data['entry_price'] = $this->language->get('entry_price');
 		$data['entry_invoice'] = $this->language->get('entry_invoice');
 		$data['entry_tax'] = $this->language->get('entry_tax');
+		$data['entry_date_from'] = $this->language->get('entry_date_from');
+		$data['entry_date_to'] = $this->language->get('entry_date_to');
 		
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -338,7 +346,32 @@ class ControllerCatalogLatenight extends Controller {
 			$data['invoice'] = '';
 		}
 
-		$this->load->model('localisation/tax');
+		if (isset($this->request->post['invoice'])) {
+			$data['invoice'] = $this->request->post['invoice'];
+		} elseif (!empty($latenight_info)) {
+			$data['invoice'] = $latenight_info['invoice'];
+		} else {
+			$data['invoice'] = '';
+		}
+
+		if (isset($this->request->post['date_from'])) {
+			$data['date_from'] = $this->request->post['date_from'];
+		} elseif (!empty($latenight_info)) {
+			$data['date_from'] = $latenight_info['date_from'];
+		} else {
+			$data['date_from'] = date('Y-m-d');
+		}
+
+
+		if (isset($this->request->post['date_to'])) {
+			$data['date_to'] = $this->request->post['date_to'];
+		} elseif (!empty($latenight_info)) {
+			$data['date_to'] = $latenight_info['date_to'];
+		} else {
+			$data['date_to'] = '9999-12-31';
+		}
+        
+        $this->load->model('localisation/tax');
 		
 		$data['taxes'] = $this->model_localisation_tax->getTaxes('0');
 		
@@ -347,7 +380,7 @@ class ControllerCatalogLatenight extends Controller {
 		} elseif (!empty($latenight_info)) {
 			$data['tax_id'] = $latenight_info['tax_id'];
 		} else {
-			$data['tax_id'] = '';
+			$data['tax_id'] = '1';
 		}
 		
 		$data['header'] = $this->load->controller('common/header');
@@ -382,9 +415,10 @@ class ControllerCatalogLatenight extends Controller {
 
 		$this->load->model('catalog/latenight');
 
-		if (isset($this->request->get['minute']) )  {
+		if (isset($this->request->get['minute']) && isset($this->request->get['travel']) ) {
 			$minute = $this->request->get['minute'];
-			$json = $this->model_catalog_latenight->getLatenightByPrice($minute);
+			$travel = $this->request->get['travel'];
+			$json = $this->model_catalog_latenight->getLatenightByPrice($minute,$travel);
 		} 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
