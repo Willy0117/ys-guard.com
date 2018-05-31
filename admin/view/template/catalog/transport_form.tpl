@@ -44,6 +44,24 @@
               <input type="text" name="invoice" value="<?php echo $invoice; ?>" placeholder="<?php echo $entry_invoice; ?>" id="input-invoice" class="form-control" />
             </div>
           </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-tax"><?php echo $entry_tax; ?></label>
+            <div class="col-sm-10">
+              <select name="tax_id" id="input-tax" class="form-control">
+                <?php if ($taxes) { ?>
+                  <?php foreach($taxes as $result) { ?>
+                      <?php if ($result['id'] == $tax_id) { ?>
+                        <option value="<?php echo $result['id'];?>" selected="selected"><?php echo $result['title'];?></option>
+                      <?php } else { ?>
+                        <option value="<?php echo $result['id'];?>"><?php echo $result['title'];?></option>
+                      <?php } ?>
+                  <?php } ?>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+            
             
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date_from"><?php echo $entry_date_from; ?></label>
@@ -70,10 +88,55 @@
     </div>
   </div>
 </div>
-<script>
-  flatpickr('.flatpickr', {
-    locale: 'ja',
+<script type="text/javascript" >
+    //エンターでのsubmitを禁止
+    $(document).ready(function () {
+        $('input,textarea[readonly]').not($('input[type="button"],input[type="submit"]')).keypress(function (e) {
+            if (!e) var e = window.event;
+            if (e.keyCode == 13)
+                return false;
+        });
+    });
+ const config = {
+		//maxDate: "today",
+    locale: {
+      weekdays: {
+          shorthand: ["日", "月", "火", "水", "木", "金", "土"],
+          longhand: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+      },
+      months: {
+          shorthand: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+          ],
+          longhand: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+          ]
+      },
+    },
     allowInput: true,
-});
+   }
+   flatpickr('.flatpickr', config);
 </script>
 <?php echo $footer; ?>

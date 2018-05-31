@@ -164,20 +164,28 @@ class ControllerCatalogTransport extends Controller {
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
 		);
+
+		$this->load->model('localisation/tax');
 		
+		$data['taxes'] = $this->model_localisation_tax->getTaxes('0');
+        
 		$transport_total = $this->model_catalog_transport->getTotalTransports();
 
 		$results = $this->model_catalog_transport->getTransports($filter_data);
-		
 
 		foreach ($results as $result) {
-			$data['transports'][] = array(
+			$tax = '';
+			foreach($data['taxes'] as $value) {
+				if ($value['id'] == $result['tax_id'] ) $tax=$value['title'];
+			}
+            $data['transports'][] = array(
 				'id'    => $result['id'],
 				'distance'         => $result['distance'],
 				'price'            => $result['price'],
 				'invoice'          => $result['invoice'],
-				'date_from'             => $result['date_from'],
-				'date_to'               => $result['date_to'],
+                'tax'              => $tax,
+				'date_from'        => $result['date_from'],
+				'date_to'          => $result['date_to'],
 				'status'		   => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'             => $this->url->link('catalog/transport/edit', 'token=' . $this->session->data['token'] . '&id=' . $result['id'] . $url, 'SSL')
 			);
@@ -194,6 +202,7 @@ class ControllerCatalogTransport extends Controller {
 		$data['column_invoice'] = $this->language->get('column_invoice');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_tax'] = $this->language->get('column_tax');
 		$data['column_date_from'] = $this->language->get('column_date_from');
 		$data['column_date_to'] = $this->language->get('column_date_to');
 
@@ -236,6 +245,9 @@ class ControllerCatalogTransport extends Controller {
 		$data['sort_distance'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=distance' . $url, 'SSL');
 		$data['sort_price'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=price' . $url, 'SSL');
 		$data['sort_invoice'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=invoice' . $url, 'SSL');
+		$data['sort_tax'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=tax' . $url, 'SSL');
+		$data['sort_date_from'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=date_from' . $url, 'SSL');
+		$data['sort_date_to'] = $this->url->link('catalog/transport', 'token=' . $this->session->data['token'] . '&sort=date_to' . $url, 'SSL');
 		
 		$url = '';
 
@@ -281,6 +293,7 @@ class ControllerCatalogTransport extends Controller {
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_date_from'] = $this->language->get('entry_date_from');
 		$data['entry_date_to'] = $this->language->get('entry_date_to');
+        $data['entry_tax'] = $this->language->get('entry_tax');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -359,7 +372,7 @@ class ControllerCatalogTransport extends Controller {
 		} elseif (!empty($transport_info)) {
 			$data['date_from'] = $transport_info['date_from'];
 		} else {
-			$data['date_from'] = '0000-01-01';
+			$data['date_from'] = date('Y-m-d');
 		}
 
         if (isset($this->request->post['date_to'])) {
@@ -369,6 +382,20 @@ class ControllerCatalogTransport extends Controller {
 		} else {
 			$data['date_to'] = '9999-12-31';
 		}
+        
+                
+        $this->load->model('localisation/tax');
+		
+		$data['taxes'] = $this->model_localisation_tax->getTaxes('0');
+		
+		if (isset($this->request->post['tax_id'])) {
+			$data['tax_id'] = $this->request->post['tax_id'];
+		} elseif (!empty($latenight_info)) {
+			$data['tax_id'] = $latenight_info['tax_id'];
+		} else {
+			$data['tax_id'] = 1;
+		}
+        
         
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

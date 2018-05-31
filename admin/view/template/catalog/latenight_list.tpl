@@ -57,13 +57,13 @@
                   <td class="text-center"><?php if ($sort == 'date_from') { ?>
                     <a href="<?php echo $sort_date_from; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_from; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_tax; ?>"><?php echo $column_date_from; ?></a>
+                    <a href="<?php echo $sort_date_from; ?>"><?php echo $column_date_from; ?></a>
                     <?php } ?>
                   </td>
                   <td class="text-center"><?php if ($sort == 'date_to') { ?>
                     <a href="<?php echo $sort_date_to; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_to; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_tax; ?>"><?php echo $column_date_to; ?></a>
+                    <a href="<?php echo $sort_date_to; ?>"><?php echo $column_date_to; ?></a>
                     <?php } ?>
                   </td>
                   <td class="text-right"><?php echo $column_action; ?></td>

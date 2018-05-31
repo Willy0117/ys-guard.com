@@ -508,7 +508,7 @@ class ModelSaleSales extends Model {
 			$p = 0;// 明細カウント
 			foreach($data['prices'] as $value) {
                 if ( $skip && $j>2) continue;
-                if ( $j>8 ) continue;
+                if ( $j>9 ) continue;
 				if ( $j == 4 ) {
 					$i++;
 					$slip = "2" . substr($y,2) ."81" . sprintf('%05d', $id*2);			

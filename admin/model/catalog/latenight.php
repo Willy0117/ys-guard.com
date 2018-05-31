@@ -37,7 +37,9 @@ class ModelCatalogLatenight extends Model {
 		$sort_data = array(
 			'timeindex',
 			'price',
-			'invoice'
+			'invoice',
+            'date_from',
+            'date_to'
 		);		
 		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {

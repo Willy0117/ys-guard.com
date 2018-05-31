@@ -1,34 +1,17 @@
-2018-05-07 2:32:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:49 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:49 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:49 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:49 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:32:49 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:14 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:14 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:14 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:14 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:14 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 2:35:24 - PHP Notice:  Undefined variable: sect in /var/www/html/admin/view/template/catalog/latenight_form.tpl on line 56
-2018-05-07 5:40:40 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 52
-2018-05-07 5:40:40 - PHP Notice:  Undefined variable: column_date_from in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 52
-2018-05-07 5:40:40 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 58
-2018-05-07 5:40:40 - PHP Notice:  Undefined variable: column_date_to in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 58
-2018-05-07 5:42:00 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 52
-2018-05-07 5:42:00 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 58
-2018-05-07 5:43:32 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 52
-2018-05-07 5:43:32 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 58
-2018-05-07 5:45:14 - PHP Notice:  Undefined variable: entry_date_from in /var/www/html/admin/view/template/catalog/transport_form.tpl on line 49
-2018-05-07 5:45:14 - PHP Notice:  Undefined variable: entry_date_from in /var/www/html/admin/view/template/catalog/transport_form.tpl on line 52
-2018-05-07 5:45:14 - PHP Notice:  Undefined variable: entry_date_to in /var/www/html/admin/view/template/catalog/transport_form.tpl on line 59
-2018-05-07 5:45:14 - PHP Notice:  Undefined variable: entry_date_to in /var/www/html/admin/view/template/catalog/transport_form.tpl on line 62
-2018-05-07 5:47:30 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 52
-2018-05-07 5:47:30 - PHP Notice:  Undefined variable: sort_tax in /var/www/html/admin/view/template/catalog/transport_list.tpl on line 58
+2018-05-12 23:38:54 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_i5f47e8365qr4oidkd0kvc8aa0, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:39:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_u9hh9cm8g62m73iqh9ocv8sho6, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:39:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_govutqapns6a9hfqrrlbpf6ai0, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:39:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_f9pkhh9mmg41ietur0g1tgnvp4, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:39:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_3lj72g2gda3h4184qq930tvse5, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:40:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_k19mrtvuacupr4s6g25nu1tev7, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:40:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_5roee52pfmad8hdqg121baghv6, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:40:21 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_i5f47e8365qr4oidkd0kvc8aa0, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:40:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_8fp56e1mfnu8vuh7ajemo06la3, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:40:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_tcsmmq7p9pg1kbh4jvqudctai7, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:41:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_la4u3c5qb81v7hbqcl6m77mnc7, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:41:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_gk2ljpd0adat13ilnkmsq23a67, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:41:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_816epfbfrj7svokg6phoalo211, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:41:36 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_4rgi3v5du3bumnq6fafqgq7lv6, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:41:44 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_i5f47e8365qr4oidkd0kvc8aa0, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:42:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_klret1nuc16kp0rf4uerf60v80, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12
+2018-05-12 23:42:06 - PHP Warning:  session_start(): open(/var/lib/php/7.0/session/sess_u01t96lte5jc47p400045lpt81, O_RDWR) failed: Permission denied (13) in /var/www/html/system/library/session.php on line 12

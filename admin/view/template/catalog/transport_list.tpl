@@ -45,17 +45,24 @@
                       <a href="<?php echo $sort_invoice; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_invoice; ?></a>
                       <?php } else { ?>
                       <a href="<?php echo $sort_invoice; ?>"><?php echo $column_invoice; ?></a>
-                      <?php } ?></td>
+                      <?php } ?>
+                  </td>
+                  <td class="text-center"><?php if ($sort == 'tax') { ?>
+                    <a href="<?php echo $sort_tax; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_tax; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_tax; ?>"><?php echo $column_tax; ?></a>
+                    <?php } ?>
+                  </td>    
                   <td class="text-right"><?php if ($sort == 'date_from') { ?>
                     <a href="<?php echo $sort_date_from; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_from; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_tax; ?>"><?php echo $column_date_from; ?></a>
+                    <a href="<?php echo $sort_date_from; ?>"><?php echo $column_date_from; ?></a>
                     <?php } ?>
                   </td>
                   <td class="text-right"><?php if ($sort == 'date_to') { ?>
                     <a href="<?php echo $sort_date_to; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_to; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_tax; ?>"><?php echo $column_date_to; ?></a>
+                    <a href="<?php echo $sort_date_to; ?>"><?php echo $column_date_to; ?></a>
                     <?php } ?>
                   </td>
                   <td class="text-right"><?php echo $column_action; ?></td>
@@ -73,6 +80,7 @@
                   <td class="text-left"><?php echo $result['distance']; ?></td>
                   <td class="text-right"><?php echo $result['price']; ?></td>
                   <td class="text-right"><?php echo $result['invoice']; ?></td>
+                  <td class="text-left"><?php echo $result['tax']; ?></td>
                   <td class="text-right"><?php echo $result['date_from']; ?></td>
                   <td class="text-right"><?php echo $result['date_to']; ?></td>                    
                   <td class="text-right"><a href="<?php echo $result['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>

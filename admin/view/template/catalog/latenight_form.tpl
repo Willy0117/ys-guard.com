@@ -90,10 +90,55 @@
       </div>
     </div>
   </div>
-<script>
-  flatpickr('.flatpickr', {
-    locale: 'ja',
+<script type="text/javascript" >
+    //エンターでのsubmitを禁止
+    $(document).ready(function () {
+        $('input,textarea[readonly]').not($('input[type="button"],input[type="submit"]')).keypress(function (e) {
+            if (!e) var e = window.event;
+            if (e.keyCode == 13)
+                return false;
+        });
+    });
+ const config = {
+		//maxDate: "today",
+    locale: {
+      weekdays: {
+          shorthand: ["日", "月", "火", "水", "木", "金", "土"],
+          longhand: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+      },
+      months: {
+          shorthand: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+          ],
+          longhand: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月",
+          ]
+      },
+    },
     allowInput: true,
-});
+   }
+   flatpickr('.flatpickr', config);
 </script>
 <?php echo $footer; ?>

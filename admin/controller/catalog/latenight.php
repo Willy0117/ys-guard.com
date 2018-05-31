@@ -359,7 +359,7 @@ class ControllerCatalogLatenight extends Controller {
 		} elseif (!empty($latenight_info)) {
 			$data['date_from'] = $latenight_info['date_from'];
 		} else {
-			$data['date_from'] = '2001-01-01';
+			$data['date_from'] = date('Y-m-d');
 		}
 
 
@@ -380,7 +380,7 @@ class ControllerCatalogLatenight extends Controller {
 		} elseif (!empty($latenight_info)) {
 			$data['tax_id'] = $latenight_info['tax_id'];
 		} else {
-			$data['tax_id'] = '';
+			$data['tax_id'] = '1';
 		}
 		
 		$data['header'] = $this->load->controller('common/header');

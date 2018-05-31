@@ -4,10 +4,10 @@
     <div class="container-fluid">
       <div class="pull-right">
         <?php if ($filter_status == 0) { ?>
-          <button type="submit" form="form-product" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"><?php echo $button_save; ?></i></button>
+          <button id="save" type="button" form="form-product" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"  onclick="setAction('<?php echo $action; ?>')"><i class="fa fa-save"><?php echo $button_save; ?></i></button>
         <?php } ?>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"><?php echo $button_cancel; ?></i></a>
-        <button type="submit" form="form-product" formaction="<?php echo $excel; ?>" data-toggle="tooltip" title="<?php echo $button_excel; ?>" class="btn btn-success"><i class="fa fa-file-excel-o"><?php echo $button_excel; ?></i></button>
+        <button type="button" form="form-product" formaction="<?php echo $excel; ?>" data-toggle="tooltip" title="<?php echo $button_excel; ?>" class="btn btn-success" onclick="setAction('<?php echo $excel; ?>')"><i class="fa fa-file-excel-o"><?php echo $button_excel; ?></i></button>
       </div>
       <h1><?php echo $heading_title; ?></h1>
     </div>
@@ -383,6 +383,9 @@
                           <td>
                             <input type="text" name="tax1" value="<?php echo $tax1; ?>" placeholder="<?php echo $entry_tax; ?>" class="tax1 form-control" />
                           </td>
+                          <td>
+                            <input readonly="readonly" type="text" name="tax1result" value="<?php echo $tax1; ?>" class="tax1Result form-control" />
+                          </td>
                         </tr>
                         <?php } ?>
                         <tr>
@@ -391,7 +394,7 @@
                           <input type="hidden" name="prices[<?php echo $i;?>][tax_id]" value="<?php echo $result['tax_id']; ?>" class="tax_id form-control" />
                           <input type="hidden" name="prices[<?php echo $i;?>][invoice]" value="<?php echo $result['invoice']; ?>" class="invoice form-control" />
                           <td>
-                            <input  readonly="readonly" type="text" name="prices[<?php echo $i;?>][name]" value="<?php echo $result['name']; ?>" placeholder="<?php echo $entry_product; ?>" class="name form-control" />
+                            <input readonly="readonly" type="text" name="prices[<?php echo $i;?>][name]" value="<?php echo $result['name']; ?>" placeholder="<?php echo $entry_product; ?>" class="name form-control" />
                           </td>
                           <td>
                             <input type="text" name="prices[<?php echo $i;?>][summary]" value="<?php echo $result['summary']; ?>" placeholder="<?php echo $entry_summary; ?>" class="summary form-control" />
@@ -429,6 +432,9 @@
                       <td>
                         <input type="text" name="tax2" value="<?php echo $tax2; ?>" placeholder="<?php echo $entry_tax; ?>" class="tax2 form-control" />
                       </td>
+                      <td class="">
+                        <input readonly="readonly" type="text" name="tax2result" value="<?php echo $tax2; ?>" class="tax2Result form-control btn-danger" />
+                      </td>    
                     </tr>
                   <tfoot >
                     <tr>
@@ -496,9 +502,8 @@ $(document).ready(function () {
       $("#base tr:last").remove();
     }
   });
-  /*
 
-  */
+    
   $(document).on("click", ".calculator", function () {
     var index = $('.calculator').index(this);
     switch (index) {
@@ -659,16 +664,16 @@ $(document).ready(function () {
       }
   };
 
-	$( 'input[name="travel"]' ).change( function() {
-		var weekday = $('select[name="weekday"]').val();
+  $( 'input[name="travel"]' ).change( function() {
+      var weekday = $('select[name="weekday"]').val();
 		//console.log(weekday);
-    var date = new Date( $( this ).val() );
+      var date = new Date( $( this ).val() );
 	  var weekday = date.getDay() ;
 		console.log(weekday);
 	  $('select[name="weekday"]').val(weekday);
     // 日付を設定する
-    var settime = date.getFullYear() + '-' + ( date.getMonth()+1 )  + '-' + date.getDate();
-    console.log(settime);
+      var settime = date.getFullYear() + '-' + ( date.getMonth()+1 )  + '-' + date.getDate();
+      console.log(settime);
     //$.each($('.setdate'), function(i, val) {
       //console.log(val);
       //$('.settime').eq(i).val( settime );
@@ -718,7 +723,36 @@ $(document).ready(function () {
     $("#timeschdule").find(".flatpickr").flatpickr(fpConf);
 	});
 });
+/*
 
+*/
+function setAction(url) {
+    $('form').attr('action', url);
+    $('form').submit();
+}    
+/*
+*/ 
+$('#form-product').submit(function() {
+    //
+    // バリデーションチェック
+    //
+    var error = -1;
+    for(i=0;i<4;i++) {
+        if ($('.model').eq(i).val() == '' && $('.invoice').eq(i).val() == 0 && $('.price').eq(i).val() > 0) error=i;
+    //    console.log($('.model').eq(i).val(),$('.invoice').eq(i).val(),$('.price').eq(i).val());
+    }
+    console.log(error);  
+    for(i=4;i<10;i++) {
+        if ($('.model').eq(i).val() == '' && $('.invoice').eq(i).val() == 0 && $('.price').eq(i).val() > 0) error=i;
+    //    console.log($('.model').eq(i).val(),$('.invoice').eq(i).val(),$('.price').eq(i).val());
+    }  
+    console.log(error);  
+    if (error != -1) {
+        alert('商品コード、供給単価が入っていないデータがあります。');
+        return false;
+    } 
+  });
+    
 $( 'select[name="purpose"]' ).change( function() {
   var id = $('select[name="purpose"]').val();
   var seturl = 'index.php?route=catalog/product/getProduct&token=' + getURLVar('token') + '&id=' + id;
@@ -758,7 +792,7 @@ function setcolumn(i,data) {
   $('.amount').eq(i).val( Math.round(data[0]['price'] * quantity) );
   var tax_id = data[0]['tax_id'];
   if (　tax_id < 1 ) tax_id=1;// 消費税８％に固定
-  arr = jQuery.grep(taxes, function(value, index ) {
+    arr = jQuery.grep(taxes, function(value, index ) {
     return (value.id == tax_id );
   });
   var tax = Math.round( data[0]['price'] * arr[0]['rate'] * quantity );
@@ -768,24 +802,9 @@ function setcolumn(i,data) {
   /* トータル再計算*/
   recalc();
 }
+/*
 
-$(document).on("change", ".settime", function () {
-  return;//すぐに発動するので今回は使わない
-  var index = $('.settime').index(this);
-  if ( index == 0 ) {
-    var settime = $('.settime').eq(index).val();
-    const fpConf = {
-     allowInput: true,
-     enableTime: true,
-     noCalendar: false,
-     minuteIncrement: 1,
-     locale: 'ja',
-     defaultDate: settime,
-  	};
-    $("#timeschdule").find(".timepickr").flatpickr(fpConf);
-  }
-});
-
+*/
 $(document).on("change", ".waittime", function () {
   var index = $('.waittime').index(this);
   if (index == 4) {
@@ -845,9 +864,10 @@ $(document).on("change", ".metar", function () {
 
     $('.mileage').eq(5).val( next );
     if ( mileage != next ) {
+      var travel = $( 'input[name="travel"]' ).val();  // 日にちの取得
       var data = next;
       var name = $('#purpose').val();
-      var seturl = 'index.php?route=catalog/transport/getPrice&token=' + getURLVar('token') + '&distance=' + data;
+      var seturl = 'index.php?route=catalog/transport/getPrice&token=' + getURLVar('token') + '&distance=' + data + '&travel=' + travel;
       console.log(seturl);
       $.ajax({
         url: seturl,
@@ -919,7 +939,7 @@ $(document).on("change", ".price", function () {
   $('.amount').eq(i).val( Math.round( price*quantity) );
   var tax_id = $('.tax_id').eq(i).val();
   if (tax_id<1) tax_id = 1;
-  arr = jQuery.grep(taxes, function(value, index ) {
+    arr = jQuery.grep(taxes, function(value, index ) {
     return (value.id == tax_id );
   });
   var tax = Math.round( price * quantity * arr[0]['rate'] );
@@ -952,6 +972,7 @@ function recalc() {
   var tax1= 0;
   var total2= 0;
   var tax2= 0;
+  var error = -1;
 
   for(i=0;i<4;i++) {
     total1 += parseFloat($('.amount').eq(i).val());
@@ -966,6 +987,9 @@ function recalc() {
   $('.total2').val( total2 );
   $('.tax1').val( tax1 );
   $('.tax2').val( tax2 );
+  $('.tax1Result').val( Math.round(total1 * 0.08) );
+  $('.tax2Result').val( Math.round(total2 * 0.08) );
+    
 }
 
 /* enter key non submit */
